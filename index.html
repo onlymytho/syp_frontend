@@ -16,6 +16,8 @@
               }
               else {
                   console.log(data)
+                  document.querySelector('h1').innerText = data.last_name + ' ' + data.first_name
+                  document.querySelector('p').innerText = data.email + '\n' + data.message
               }
             };
         </script>
