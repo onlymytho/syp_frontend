@@ -23,7 +23,9 @@ var postJSON = function(url, params, callback) {
 
     xhr.onreadystatechange = function() {//Call a function when the state changes.
         if(xhr.readyState == 4 && xhr.status == 200) {
-            alert(xhr.responseText);
+            callback(null, xhr.responseText);
+        } else {
+            callback(status)
         }
     }
     xhr.send(params);
