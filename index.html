@@ -7,7 +7,7 @@
         <script type="text/javascript">
             postJSON(
                 "https://f5iyyum9qf.execute-api.ap-northeast-2.amazonaws.com/dev/test",
-                "email=abc@test.com&first_name=sanghyuk&last_name=jung",
+                '{"email":"abc@test.com","first_name":"sanghyuk","last_name":"jung"}',
                 callback_handling);
 
             var callback_handling = function(err, data) {
