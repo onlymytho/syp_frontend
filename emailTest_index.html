@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="./static/js/getJSON.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var callback_handling = function(err, data) {
+              if (err != null) {
+                  alert('Something went wrong: ' + err);
+              }
+              else {
+                  console.log(data)
+                  document.querySelector('h1').innerText = data.body.last_name + ' ' + data.body.first_name
+                  document.querySelector('p').innerText = data.body.email + '\n' + data.body.message
+              }
+            };
+
+            postJSON(
+                "https://f5iyyum9qf.execute-api.ap-northeast-2.amazonaws.com/dev/test",
+                '{"email":"abc@test.com","first_name":"sanghyuk","last_name":"jung"}',
+                callback_handling);
+        </script>
+    </head>
+    <body>
+        <div class="">
+            <h1></h1>
+            <p></p>
+        </div>
+    </body>
+</html>
