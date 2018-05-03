@@ -15,17 +15,17 @@ var getJSON = function(url, callback) {
 
 var postJSON = function(url, params, callback) {
     var xhr = new XMLHttpRequest();
-    var params; //"lorem=ipsum&name=binny";
+    var params; // as json style string;
     xhr.open("POST", url, true);
 
     //Send the proper header information along with the request
     xhr.setRequestHeader("Content-type", "application/json");
 
     xhr.onreadystatechange = function() {//Call a function when the state changes.
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            callback(null, xhr.responseText);
+        if(xhr.status == 200) {
+            callback(null, JSON.parse(xhr.responseText));
         } else {
-            callback(status)
+            callback(xhr.status, null)
         }
     }
     xhr.send(params);
