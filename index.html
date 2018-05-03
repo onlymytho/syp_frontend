@@ -18,7 +18,7 @@
 
             function PersonalizeInit() {
                 getJSON(
-                    "https://g95xoism30.execute-api.ap-northeast-2.amazonaws.com/dev/personalize/init",
+                    "https://g95xoism30.execute-api.ap-northeast-2.amazonaws.com/dev/personalize/init?event=this",
                     callback_handling);
             }
             function PersonalizeGetNextQuestion(recipe_id, question_id, response, question_order) {
