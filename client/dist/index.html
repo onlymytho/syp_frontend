@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="./static/js/getJSON.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var callback_handling = function(err, data) {
+              if (err != null) {
+                  alert('Something went wrong: ' + err);
+              }
+              else {
+                  console.log(data)
+                  var question = data.data.question
+                  var recipe = data.data.recipe
+
+                  question_header = document.getElementById('question_header')
+                  question_body = document.getElementById('question_body')
+                  question_header.innerText = question.content;
+                  question_body.innerHTML = ""
+
+                  if (['one', 'range'].indexOf(question.input_type) >= 0){
+                      let question_options = {}
+                      if (question.opt_id != null) {question_options['id'] = question.opt_id.split(', ')}
+                      if (question.opt_res != null) {question_options["res"] = question.opt_res.split(', ')}
+                      if (question.opt_text != null) {question_options["text"] = question.opt_text.split(', ')}
+                      option_list = document.createElement('ul')
+                      question_body.append(option_list)
+
+                      for (i in question_options['text']) {
+                          let li = document.createElement('li')
+                          let a = document.createElement('a')
+                          li.innerText = question_options['text'][i]
+                          a.href = "javascript:void(0);"
+                          a.addEventListener("click", PersonalizeGetNextQuestion.bind(this, recipe.id, '"'+question.id+'"', question_options['id'][i], question.question_order, question.input_type), false)
+                          a.append(li)
+                          option_list.append(a)
+                      }
+                  }
+                  else if (question.input_type == 'multiple') {
+                      let question_options = {}
+                      if (question.opt_id != null) {question_options['id'] = question.opt_id.split(', ')}
+                      if (question.opt_res != null) {question_options["res"] = question.opt_res.split(', ')}
+                      if (question.opt_text != null) {question_options["text"] = question.opt_text.split(', ')}
+
+                      let form = document.createElement('form')
+                      for (i in question_options['text']) {
+                          let input = document.createElement('input')
+                          let label = document.createElement('label')
+                          input.type = 'checkbox'
+                          input.id = question_options['id'][i]
+                          input.value = question_options['id'][i]
+                          label.for = question_options['id'][i]
+                          label.innerText = question_options['text'][i]
+                          form.appendChild(input)
+                          form.appendChild(label)
+                      }
+                      let button = document.createElement('button')
+                      button.type = 'button'
+                      form.appendChild(button)
+                      button.addEventListener("click", function(){
+                          checked_response = '';
+                          for (let i=0; i++; i<document.querySelectorAll('form input[type=checkbox]:checked').length){
+                              checked_response += (document.querySelectorAll('form input[type=checkbox]:checked')[i].value + ', ')
+                          };
+                          checked_response = checked_response.slice(0, -2);
+                          PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', checked_response, question.question_order, question.input_type)
+                      }, false);
+
+                      question_body.appendChild(form)
+                  }
+                  else if (question.input_type == 'input'){
+                      let form = document.createElement('form')
+                      let input = document.createElement('input')
+                      let button = document.createElement('button')
+                      button.type = 'button'
+                      form.appendChild(input)
+                      form.appendChild(button)
+                      question_body.appendChild(form)
+                      button.addEventListener("click", function(){PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', input.value, question.question_order, question.input_type)}, false)
+                  }
+                  else if (question.input_type == null){
+                      PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', null, question.question_order, question.input_type)
+                  };
+              }
+            };
+
+            function PersonalizeInit() {
+                getJSON(
+                    "https://g95xoism30.execute-api.ap-northeast-2.amazonaws.com/dev/personalize/init",
+                    callback_handling);
+            };
+            function PersonalizeGetNextQuestion(recipe_id, question_id, response, question_order, input_type) {
+                postJSON(
+                    "https://g95xoism30.execute-api.ap-northeast-2.amazonaws.com/dev/personalize/nextQuestion",
+                    {
+                        "recipe_id": recipe_id,
+                        "question_id": question_id,
+                        "response": response,
+                        "question_order": question_order,
+                        "input_type": input_type
+                    },
+                    callback_handling);
+            };
+        </script>
+    </head>
+    <body>
+        <button type="button" name="button" onclick="PersonalizeInit()">추천 시작!</button>
+        <div id="content">
+            <h4 id="question_header"></h4>
+            <div id="question_body"></div>
+        </div>
+    </body>
+</html>
