@@ -102,7 +102,10 @@
                       button.addEventListener("click", function(){PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', input.value, question.question_order, question.input_type)}, false)
                   }
                   else if (question.input_type == null){
-                      PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', null, question.question_order, question.input_type)
+                      waiting_time = Math.cbrt(question.content.length) * 700
+                      console.log('waiting_time: ' + waiting_time)
+                      setTimeout(function() {PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', null, question.question_order, question.input_type)}, waiting_time);
+                      clearTimeout()
                   };
               }
             };
@@ -150,11 +153,11 @@
                 padding: 8px;
                 color: #444444;
             }
-            #question_body input[type="text"]::placeholder {
+            #question_body input::placeholder {
                 color: #dfdfdf;
             }
-            #question_body input[type="text"]:hover,
-            #question_body input[type="text"]:focus {
+            #question_body input:hover,
+            #question_body input:focus {
                 border-color: #acacac;
             }
             #question_body button {
