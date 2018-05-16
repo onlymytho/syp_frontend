@@ -60,12 +60,15 @@
                       button.innerText = '선택완료'
                       form.appendChild(button)
                       button.addEventListener("click", function(){
-                          checked_response = '';
-                          for (let i=0; i++; i<document.querySelectorAll('form input[type=checkbox]:checked').length){
-                              checked_response += (document.querySelectorAll('form input[type=checkbox]:checked')[i].value + ', ')
-                          };
-                          checked_response = checked_response.slice(0, -2);
-                          PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', checked_response, question.question_order, question.input_type)
+                          checked_response = document.querySelectorAll('form input[type=checkbox]:checked')
+                          if (checked_response.length > 0) {
+                              checked_response_set = '';
+                              for (let i=0; i++; i<checked_response.length){
+                                  checked_response_set += (checked_response[i].value + ', ')
+                              };
+                              checked_response_set = checked_response_set.slice(0, -2);
+                              PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', checked_response_set, question.question_order, question.input_type)
+                          }
                       }, false);
 
                       question_body.appendChild(form)
@@ -83,8 +86,10 @@
                             var key = e.which || e.keyCode;
                             if (key === 13) { // 13 is enter
                                 e.preventDefault();
-                                console.log(e)
-                                PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', this.value, question.question_order, question.input_type)
+                                if (this.value) {
+                                    console.log(e)
+                                    PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', this.value, question.question_order, question.input_type)
+                                }
                             }
                         });
                       button.addEventListener("click", function(){PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', input.value, question.question_order, question.input_type)}, false)
