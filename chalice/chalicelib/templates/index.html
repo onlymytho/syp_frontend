@@ -44,44 +44,51 @@
                       if (question.opt_text != null) {question_options["text"] = question.opt_text.split(', ')}
 
                       let form = document.createElement('form')
+                      form.className = 'multiple'
                       for (i in question_options['text']) {
                           let input = document.createElement('input')
                           let label = document.createElement('label')
+                          let li = document.createElement('li')
+                          form.appendChild(li)
                           input.type = 'checkbox'
                           input.id = question_options['id'][i]
                           input.value = question_options['id'][i]
-                          label.for = question_options['id'][i]
+                          label.htmlFor = question_options['id'][i]
                           label.innerText = question_options['text'][i]
-                          form.appendChild(input)
-                          form.appendChild(label)
+                          li.appendChild(input)
+                          li.appendChild(label)
                       }
                       let button = document.createElement('button')
                       button.type = 'button'
                       button.innerText = '선택완료'
                       form.appendChild(button)
-                      button.addEventListener("click", function(){
-                          checked_response = document.querySelectorAll('form input[type=checkbox]:checked')
-                          if (checked_response.length > 0) {
-                              checked_response_set = '';
-                              for (let i=0; i++; i<checked_response.length){
-                                  checked_response_set += (checked_response[i].value + ', ')
-                              };
-                              checked_response_set = checked_response_set.slice(0, -2);
-                              PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', checked_response_set, question.question_order, question.input_type)
-                          }
-                      }, false);
-
+                          button.addEventListener("click", function(){
+                              checked_response = document.querySelectorAll('form input[type=checkbox]:checked')
+                              if (checked_response.length > 0) {
+                                  checked_response_set = '';
+                                  for (let i=0; i++; i<checked_response.length){
+                                      checked_response_set += (checked_response[i].value + ', ')
+                                  };
+                                  checked_response_set = checked_response_set.slice(0, -2);
+                                  PersonalizeGetNextQuestion(recipe.id, '"'+question.id+'"', checked_response_set, question.question_order, question.input_type)
+                              }
+                          }, false);
                       question_body.appendChild(form)
                   }
                   else if (question.input_type == 'input'){
                       let form = document.createElement('form')
                       let input = document.createElement('input')
                       let button = document.createElement('button')
+                      form.className = 'input'
                       button.type = 'button'
-                      button.innerText = '완료'
+                      button.innerText = '>'
                       form.appendChild(input)
                       form.appendChild(button)
                       question_body.appendChild(form)
+                      if      (question.id == 'first_name') {input.type='text'; input.placeholder = '여기에 적어주세요'}
+                      else if (question.id == 'age') {input.type = 'number'; input.placeholder = '숫자로 적어주세요'}
+                      else if (question.id == 'email') {input.type = 'email'; input.placeholder = 'abc@example.com'; input.style.width= '12em';}
+                      else    {input.type = 'text'; input.placeholder = '여기에 적어주세요'}
                       input.addEventListener("keypress", function (e) {
                             var key = e.which || e.keyCode;
                             if (key === 13) { // 13 is enter
@@ -118,6 +125,78 @@
                     callback_handling);
             };
         </script>
+        <style media="screen">
+            div#content {
+                margin: 0 2em auto;
+                width: calc(100% - 4em);
+                margin-top: 10%;
+            }
+            #question_header {
+                text-align: center;
+                font-size: 2em;
+            }
+            #question_body {
+                margin: 0 auto;
+                width: fit-content;
+            }
+            #question_body input[type="text"],
+            #question_body input[type="email"],
+            #question_body input[type="number"] {
+                width: 8em;
+                border: none;
+                border-bottom: 1px solid #dfdfdf;
+                outline: none;
+                font-size: 1.5em;
+                padding: 8px;
+                color: #444444;
+            }
+            #question_body input[type="text"]::placeholder {
+                color: #dfdfdf;
+            }
+            #question_body input[type="text"]:hover,
+            #question_body input[type="text"]:focus {
+                border-color: #acacac;
+            }
+            #question_body button {
+                border-radius: 100px;
+                border-color: #dfdfdf;
+                color: #acacac;
+                font-size: 1em;
+                min-width: 40px;
+                width: fit-content;
+                height: 40px;
+                padding: 0.5em 1em;
+                margin-left: 12px;
+                outline: none;
+            }
+            #question_body button:hover {
+                border-color: #acacac;
+                color: #797979;
+                cursor: pointer;
+            }
+            #question_body ul {
+                padding: 0;
+            }
+            #question_body ul li {
+                display: inline-block;
+                margin: 2em;
+                padding: 1em;
+                border-radius: 8px;
+                color: #444;
+            }
+            #question_body ul li:hover {
+                color: #acacac;
+            }
+            #question_body form.multiple button {
+                display: block;
+                margin: 0 auto;
+                margin-top: 1em;
+            }
+            #question_body form.multiple li {
+                display: inline-block;
+                margin: 0.5em;
+            }
+        </style>
     </head>
     <body>
         <button type="button" name="button" onclick="PersonalizeInit()">추천 시작!</button>
