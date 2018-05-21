@@ -7,6 +7,8 @@
         <script src="https://s3.ap-northeast-2.amazonaws.com/syp-dev-webapp/static/js/getJSON.js" type="text/javascript"></script>
         <script type="text/javascript">
             var question_list = []
+            var wait = true
+            console.log("테스트를 위해 기다리는 시간을 없애고 싶으면,\n'wait = false' 라고 입력해주세요.")
 
             var callback_handling = function(err, data) {
               if (err != null) {
@@ -114,7 +116,11 @@
                       button.addEventListener("click", function(){PersonalizePostResponse(recipe.id, '"'+question.id+'"', input.value, question.question_order, question.input_type)}, false)
                   }
                   else if (question.input_type == null){
-                      waiting_time = Math.cbrt(question.content.length) * 700
+                      if (wait == true) {
+                          waiting_time = Math.cbrt(question.content.length) * 700
+                      } else {
+                          waiting_time = 0
+                      }
                       console.log('waiting_time: ' + waiting_time)
                       setTimeout(function() {PersonalizePostResponse(recipe.id, '"'+question.id+'"', null, question.question_order, question.input_type)}, waiting_time);
                       clearTimeout()
