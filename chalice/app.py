@@ -7,7 +7,6 @@ env = Environment(
     loader=PackageLoader(__name__, 'chalicelib/templates'),
     autoescape=select_autoescape(['html', 'xml']))
 
-
 def render_template(template_name, context, status_code=200, content_type='text/html', headers=None):
     template = env.get_template(template_name)
     body = template.render(**context)
@@ -25,12 +24,18 @@ def render_template(template_name, context, status_code=200, content_type='text/
 
 @app.route('/')
 def index():
-    return {'hello': 'world'}
+    return render_template('index.html', {'name': 'home'})
 
 @app.route('/personalize', cors=True)
-def index_test_cors():
+def personalize():
     return render_template('index.html', {
         'name': 'personalize'
+    })
+
+@app.route('/personalize/result', cors=True)
+def recommend():
+    return render_template('result.html', {
+        'name': 'result'
     })
 
 
