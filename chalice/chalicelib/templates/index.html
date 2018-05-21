@@ -19,10 +19,10 @@
                   var question = data.data.question
                   var recipe = data.data.recipe
 
-                  if (data.data.method == 'getQuestion') {
+                  if (data.data.method == 'getQuestion' && question.input_type != null) {
                       question_list.pop()
                   } else {
-                      previous_question = question_list.slice(-1)[0]
+                      var previous_question = question_list.slice(-1)[0]
                       console.log(previous_question)
                       question_list.push(question.id)
                       document.getElementById('back').addEventListener("click", function() {PersonalizeGetQuestion(recipe.id, "'"+previous_question+"'")}, false)
