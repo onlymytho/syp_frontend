@@ -16,8 +16,13 @@
               }
               else {
                   console.log(data)
+                  if (!data.data.question) {
+                      window.location.replace('https://b1r9haeurh.execute-api.ap-northeast-2.amazonaws.com/api/personalize/result' + '?recipe_id=' + data.data.recipe.id)
+                  }
                   var question = data.data.question
                   var recipe = data.data.recipe
+
+                  localStorage.setItem('recipe_id', recipe.id)
 
                   if (data.data.method == 'getQuestion' && question.input_type != null) {
                       question_list.pop()
