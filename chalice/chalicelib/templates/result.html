@@ -14,8 +14,13 @@
                 console.log(data)
                 result = data.data.result
 
+                ul = document.getElementById('product_list')
                 for (i=0; i<result.length; i++) {
-                    console.log(result[i].name)
+                    li = document.createElement('li')
+                    product_name = document.createElement('h4')
+                    product_name.innerHTML = result[i].name
+                    li.appendChild(product_name)
+                    ul.appendChild(li)
                 }
             }
         }
@@ -53,8 +58,51 @@
                return false;
         }
         </script>
+        <style media="screen">
+            .content {
+                margin: 0 auto;
+                /* width: calc(100% - 4em); */
+                width: 920px;
+                margin-top: 10%;
+            }
+            .nav {
+                display: inline-block;
+                vertical-align: top;
+            }
+            .nav#list {
+                width: 200px;
+            }
+            #list ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            #list ul li {
+                padding: 12px 8px;
+                border: 1px solid #dfdfdf;
+                cursor: pointer;
+            }
+            #list ul li h4 {
+                margin: 0;
+            }
+            .nav#show {
+                border: 1px solid #dfdfdf;
+                width: 700px;
+
+            }
+        </style>
     </head>
     <body>
-        결과페이지입니다.
+        <div class="content">
+            <div class="nav" id="list">
+                <ul id="product_list">
+
+                </ul>
+            </div>
+            <div class="nav" id="show">
+                <h2></h2>
+
+            </div>
+        </div>
     </body>
 </html>
