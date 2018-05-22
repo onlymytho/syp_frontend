@@ -29,9 +29,7 @@ def index():
 
 @app.route('/personalize', cors=True)
 def personalize():
-    return render_template('index.html', {
-        'name': 'personalize'
-    })
+    return render_template('index.html', {'name': 'personalize'})
 
 @app.route('/personalize/result', cors=True)
 def recommend():
