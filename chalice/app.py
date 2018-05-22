@@ -32,10 +32,15 @@ def personalize():
     return render_template('index.html', {'name': 'personalize'})
 
 @app.route('/personalize/result', cors=True)
-def recommend():
-    return render_template('result.html', {
-        'name': 'result'
-    })
+def result():
+    print ("/personalize/result")
+    print (app.current_request)
+    recipe_id = app.current_request.query_params.get('recipe_id')
+    print (recipe_id)
+    if recipe_id:
+        return render_template('result.html', {'recipe_id': recipe_id})
+    else:
+        return Response(status_code=422)
 
 
 # The view function above will return {"hello": "world"}
