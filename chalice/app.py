@@ -17,8 +17,9 @@ def render_template(template_name, context, status_code=200, content_type='text/
     headers.update({
         'Content-Type': content_type,
     })
-
-    return Response(body=body, status_code=status_code, headers=headers)
+    response = Response(body=body, status_code=status_code, headers=headers)
+    print (response.to_dict())
+    return response
 
 
 
