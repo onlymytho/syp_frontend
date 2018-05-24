@@ -5,6 +5,7 @@
         <title>Sugar, Yes, Please</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://s3.ap-northeast-2.amazonaws.com/syp-dev-webapp/static/js/getJSON.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://s3.ap-northeast-2.amazonaws.com/syp-dev-webapp/static/css/master.css" type="text/javascript">
         <script type="text/javascript">
             var question_list = []
             var wait = true
@@ -28,9 +29,12 @@
                       question_list.pop()
                   } else {
                       var previous_question = question_list.slice(-1)[0]
+                      backbutton = document.getElementById('back')
                       console.log(previous_question)
                       question_list.push(question.id)
-                      document.getElementById('back').addEventListener("click", function() {PersonalizeGetQuestion(recipe.id, "'"+previous_question+"'")}, false)
+                      var backbutton_event = function() {PersonalizeGetQuestion(recipe.id, "'"+previous_question+"'"); backbutton.removeEventListener("click", backbutton_event, false)}
+                      // 다.음.할.일. :: unbind pure javascript :: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
+                      backbutton.addEventListener("click", backbutton_event, false)
                   }
 
                   question_header = document.getElementById('question_header')
@@ -160,78 +164,6 @@
                     callback_handling);
             };
         </script>
-        <style media="screen">
-            div#content {
-                margin: 0 2em auto;
-                width: calc(100% - 4em);
-                margin-top: 10%;
-            }
-            #question_header {
-                text-align: center;
-                font-size: 2em;
-            }
-            #question_body {
-                margin: 0 auto;
-                width: fit-content;
-            }
-            #question_body input[type="text"],
-            #question_body input[type="email"],
-            #question_body input[type="number"] {
-                width: 8em;
-                border: none;
-                border-bottom: 1px solid #dfdfdf;
-                outline: none;
-                font-size: 1.5em;
-                padding: 8px;
-                color: #444444;
-            }
-            #question_body input::placeholder {
-                color: #dfdfdf;
-            }
-            #question_body input:hover,
-            #question_body input:focus {
-                border-color: #acacac;
-            }
-            #question_body button {
-                border-radius: 100px;
-                border-color: #dfdfdf;
-                color: #acacac;
-                font-size: 1em;
-                min-width: 40px;
-                width: fit-content;
-                height: 40px;
-                padding: 0.5em 1em;
-                margin-left: 12px;
-                outline: none;
-            }
-            #question_body button:hover {
-                border-color: #acacac;
-                color: #797979;
-                cursor: pointer;
-            }
-            #question_body ul {
-                padding: 0;
-            }
-            #question_body ul li {
-                display: inline-block;
-                margin: 2em;
-                padding: 1em;
-                border-radius: 8px;
-                color: #444;
-            }
-            #question_body ul li:hover {
-                color: #acacac;
-            }
-            #question_body form.multiple button {
-                display: block;
-                margin: 0 auto;
-                margin-top: 1em;
-            }
-            #question_body form.multiple li {
-                display: inline-block;
-                margin: 0.5em;
-            }
-        </style>
     </head>
     <body>
         <button type="button" name="button" onclick="PersonalizeInit()">추천 시작!</button>

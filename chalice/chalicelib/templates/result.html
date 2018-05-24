@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title></title>
         <script src="https://s3.ap-northeast-2.amazonaws.com/syp-dev-webapp/static/js/getJSON.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://s3.ap-northeast-2.amazonaws.com/syp-dev-webapp/static/css/master.css" type="text/javascript">
         <script type="text/javascript">
 
         var callback_handling = function(err, data) {
@@ -24,8 +25,8 @@
                 }
             }
         }
-
-        getResult(getRecipe())
+        var recipe = getRecipe()
+        getResult(recipe)
 
         function getRecipe() {
             if (localStorage.getItem('recipe_id')) {
@@ -48,6 +49,7 @@
                 callback_handling);
         };
         function getQueryVariable(variable)
+        // Get variable from query_string in URL
         {
                var query = window.location.search.substring(1);
                var vars = query.split("&");
@@ -58,39 +60,6 @@
                return false;
         }
         </script>
-        <style media="screen">
-            .content {
-                margin: 0 auto;
-                /* width: calc(100% - 4em); */
-                width: 920px;
-                margin-top: 10%;
-            }
-            .nav {
-                display: inline-block;
-                vertical-align: top;
-            }
-            .nav#list {
-                width: 200px;
-            }
-            #list ul {
-                padding: 0;
-                margin: 0;
-                list-style: none;
-            }
-            #list ul li {
-                padding: 12px 8px;
-                border: 1px solid #dfdfdf;
-                cursor: pointer;
-            }
-            #list ul li h4 {
-                margin: 0;
-            }
-            .nav#show {
-                border: 1px solid #dfdfdf;
-                width: 700px;
-
-            }
-        </style>
     </head>
     <body>
         <div class="content">
