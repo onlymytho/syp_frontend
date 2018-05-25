@@ -34,7 +34,7 @@ plugins:
 custom:
   client:
     bucketName: syp-dev-webapp
-    distributionFolder:
+    distributionFolder: chalice/chalicelib #default: client/dist
     indexDocument: index.html
 
     # dockerizePip: non-linux
