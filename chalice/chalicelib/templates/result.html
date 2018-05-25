@@ -61,15 +61,81 @@
         </script>
     </head>
     <body>
+        <header>
+            <span class="header__logo">영양섬</span>
+            <ul>
+                <li><button class="btn__pilltype" type="button" name="button">나만의 영양제</button></li>
+                <li><a href="#">결과보기</a></li>
+                <li><a href="#">데일리팩</a></li>
+            </ul>
+        </header>
         <div class="content">
-            <div class="nav" id="list">
-                <ul id="product_list">
+            <div class="recommendation">
+                <div class="recommendation__intro">
+                    <h1>상혁 님에게 알맞는 영양제</h1>
+                    <p>약 37개의 에비던스와 OOO를 기반으로 답변해주신 상혁님의 상태에 맞게 신경써야 할 점과 영양제를 골라봤어요.</p>
+                </div>
+                <div class="recommendation__body">
+                    <div class="recommendation__body__product_list">
+                        <div class="recommendation__body__product_list__header">
+                            <h3 class="h3--title">추천 목록</h3>
+                        </div>
+                        <div class="recommendation__body__product_list__body">
+                            <ul>
+                                <li class="li__product_list">
+                                    <img class="product_image" src="" alt="product_image">
+                                    <h3 class="product_name">비타민 C</h3>
+                                    <span class="quantity_controller">
+                                        <button class="btn__roundline--add" type="button" name="button">+</button>
+                                        <p class="quantity_controller__number">2</p>
+                                        <button class="btn__roundline--subtract" type="button" name="button">-</button>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="recommendation__body__product_list__footer">
+                            <button class="btn__pilltype--addallbtn" type="button" name="button">+ 추천 목록 전체 추가하기</button>
+                        </div>
+                    </div>
+                    <div class="recommendation__body__product_content">
+                        <ul>
+                            <li class="li__product_content">
+                                <div class="header">
+                                    <img class="product_image" src="" alt="product_image">
+                                    <h3 class="product-name">비타민 C</h3>
+                                    <p class="product_nickname">OOO의 제왕, 일상의 활력소</p>
+                                </div>
+                                <div class="content">
+                                    <div class="content__reason">
+                                        <h4 class="title">채소를 별로 먹지 않아요</h4>
+                                        <p class="description">채소를 별로 먹지 않는 상혁님은 <strong>비타민 C</strong>와 <strong>식이섬유</strong>가 부족할 수 있어요. 게다가 배변활동이 원활하지 않은 원인도 식습관 때문일 수 있어요.</p>
+                                    </div>
+                                    <div class="content__howto">
+                                        <h4 class="title">어떻게 먹어야 하나요?</h4>
+                                        <p class="description">식후 ∙ 300mg~500mg(2정)</p>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <a class="a__view_detail" href="#"></a>
+                                    <button class="btn__pilltype--add_to_pack" type="button" name="button">+ 추가됨</button>
+                                </div>
+                                <!-- code... -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="finishing">
+                    <button class="btn__pilltype--go_to_dailypack" type="button" name="button">내 데일리팩 확인하러 가기 ></button>
+                </div>
+                <div class="nav" id="list">
+                    <ul id="product_list">
 
-                </ul>
-            </div>
-            <div class="nav" id="show">
-                <h2></h2>
+                    </ul>
+                </div>
+                <div class="nav" id="show">
+                    <h2></h2>
 
+                </div>
             </div>
         </div>
     </body>
