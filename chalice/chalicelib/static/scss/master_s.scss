@@ -1,42 +1,254 @@
+$break-small: 320px;
+$break-large: 1024px;
+
+
+$color-mono-01: #4a4a4a;
+$color-mono-05: #a0a0a0;
+$color-mono-06: #efefef;
+$color-mono-09: #fefefe;
+$color-mono-10: #ffffff;
+
+$margin-side-desktop: 48px;
+$margin-content-desktop: 24px;
+
+$margin-side-mobile: 20px;
+$margin-content-mobile: 16px;
+
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: $color-mono-01};
 
 html, body {
-  height: 100%;
-  margin: 0;
-}
+    font-size: 100%;
+    height: 100%;
+    max-width: 100%;
+    margin: 0;
+    line-height: 1.5;
+    -webkit-overflow-scrolling: touch;};
 
-body {
-  line-height: 1.5;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-flex;
-  display: flex;
-}
-button {
-    .btn-pilltype {
-        padding: 12px 24px;
-        border-radius: 999px;
-        outline: none;};
-    .btn-roundline {
-        }
-}
+h1 {
+    font-size: 2rem;
+    @media screen and (max-width: $break-large) {
 
-header {
-    &__logo {
-        font-weight: bold;
     }
 }
+h3 {
+    font-size: 20px;
+    line-height: 24px;
+}
+h4 {
+    font-size: 1rem;
+    font-weight: bold;
+}
+ul {
+    list-style: none;
+}
+button {
+    &.btn__pilltype {
+        padding: 12px 24px;
+        border-radius: 999px;
+        outline: none;
+        font-size: 1rem;
+        background-color: $color-mono-10;
+        @media screen and (max-width: $break-large) {
+            padding: $margin-content-mobile/2 $margin-content-mobile;
+        }
+    };
+    &.btn__roundline {
+        width: 24px;
+        height: 24px;
+        border: 1px solid $color-mono-05;
+        border-radius: 999px;};};
 
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    @media screen and (max-width: $break-large) {
+        // padding: $margin-content-mobile 0;
+        background-color: $color-mono-10;
+        border-bottom: 1px solid $color-mono-09;
+    }
+    .inner_wrapper {
+        margin: 16px $margin-side-desktop;
+        @media screen and (max-width: $break-large) {
+            margin: 16px $margin-side-mobile;
+        }
+        .logo {
+            font-weight: bold;
+            vertical-align: middle;};
+        ul {
+            float: right;
+            display: inline-block;
+            li {
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 12px;
+                button {
+                    margin: -$margin-content-mobile 0;
+                }
+                a {
+                    padding: 12px 0px;
+                    text-decoration: none;
+                    color: #999;
+                    &:hover {
+                        color: #444;
+                        text-decoration: underline;}}}}}};
+
+.content {
+    margin: $margin-side-desktop*2 $margin-side-desktop;
+    @media screen and (max-width: $break-large) {
+        margin: $margin-side-mobile*6 $margin-side-mobile
+    }
+    .recommendation {
+        &__intro {
+            margin-bottom: $margin-side-desktop;
+            @media screen and (max-width: $break-large) {
+                margin-bottom: $margin-side-mobile*3};
+            h1 {
+                margin-bottom: 12px;}}
+        &__body {
+            white-space: nowrap;
+            &__product_list {
+                width: 342px;
+                margin-top: 24px;
+                display: inline-block;
+                vertical-align: top;
+                margin-right: $margin-content-desktop*2;
+                @media screen and (max-width: $break-large) {
+                    width: 100%;
+                    display: block;
+                    margin-bottom: $margin-side-mobile*3;
+                }
+                &__header {
+                    width: 100%;
+                    border-bottom: 1px solid $color-mono-06;
+                    .title {
+                        margin-bottom: 8px;
+                    }}
+                &__body {
+                    ul li {
+                        margin: 24px 0px;
+                        * {
+                            display: inline-block;
+                            vertical-align: top;}
+                        .product_image {
+                            width: 24px;
+                            height: 24px;
+                            border-radius: 100%;
+                            background-color: $color-mono-06;
+                            background-image: url("")}
+                        .product_name {
+                            margin-left: 16px;}
+                        .quantity_controller {
+                            float: right;
+                            *:not(:last-child) {
+                                margin-right: 16px;
+                                font-size: 1rem}}}}
+                &__footer {
+                    overflow: hidden;
+                    button {
+                        float: right;}}}
+            &__product_content {
+                display: inline-block;
+                vertical-align: top;
+                width: calc(100% - 342px - #{$margin-side-desktop});
+                overflow-x: scroll;
+                padding: 16px;
+                transform: translate(-16px, -16px);
+                @media screen and (max-width: $break-large) {
+                    width: calc(100% + #{$margin-content-mobile}*2);
+                    display: block;
+                    margin-bottom: $margin-side-mobile*3;
+                    -webkit-overflow-scrolling: touch;
+                }
+                ul {
+                    white-space: nowrap;
+                }
+                ul li {
+                    width: 360px;
+                    box-shadow: 2px 4px 16px 0px rgba(0,0,0,0.1);
+                    border-radius: 8px;
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-right: $margin-content-desktop;
+                    white-space: normal;
+                    @media screen and (max-width: $break-large) {
+                        width: calc(100% - #{$margin-content-mobile}*2);
+                        margin-right: $margin-content-mobile;
+                    }
+                    .header {
+                        margin: $margin-content-desktop;
+                        margin-bottom: 0;
+                        width: calc(100% - #{$margin-content-desktop}*2);
+                        @media screen and (max-width: $break-large) {
+                            margin: $margin-content-mobile;
+                            margin-bottom: 0;
+                            width: calc(100% - #{$margin-content-mobile}*2);
+                        }
+                        .product_image {
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 100%;
+                            background-color: $color-mono-06;
+                            background-image: url("");
+                            display: inline-block;
+                            vertical-align: top;}
+                        .product_name_div {
+                            display: inline-block;
+                            vertical-align: top;
+                            margin-left: 16px;
+                            @media screen and (max-width: $break-large) {
+                                margin-left: $margin-content-mobile*2/3
+                            }
+                            .product_name {
+                                }
+                            .product_nickname {
+                                color: $color-mono-05;
+                                margin-top: 4px;}}}
+                    .content {
+                        margin: $margin-content-desktop*1.5 $margin-content-desktop;
+                        width: calc(100% - #{$margin-content-desktop}*2);
+                        @media screen and (max-width: $break-large) {
+                            margin: $margin-content-mobile*1.5 $margin-content-mobile;
+                            width: calc(100% - #{$margin-content-mobile}*2);
+                        }
+                        .paragraph:not(:last-child) {
+                            margin-bottom: 24px;
+                            h4.title {
+                                margin-bottom: 4px;
+                            }
+                            p.description {
+
+                            }
+                        }}
+                    .footer {
+                        margin: 0px 24px 24px 24px;
+                        width: calc(100% - #{$margin-content-desktop});
+                        overflow: hidden;
+                        @media screen and (max-width: $break-large) {
+                            margin: $margin-content-mobile*1.5 $margin-content-mobile;
+                            width: calc(100% - #{$margin-content-mobile}*2);
+                        }
+                        button {
+                            float: right;
+                        }}}}}
+        &__footer {
+            overflow: hidden;
+            button {
+                float: right;
+            }}
+        }}
+
+
+// For legacy selectors in index.html
 div#content {
     margin: 0 2em auto;
     width: calc(100% - 4em);
-    margin-top: 10%;
-}
+    margin-top: 10%;}
 #question_header {
     text-align: center;
     font-size: 2em;
@@ -74,7 +286,7 @@ div#content {
         &:hover {
             border-color: #acacac;
             color: #797979;
-            cursor: pointer;};};};
+            cursor: pointer;};};
     ul {
         padding: 0;
         li {
@@ -93,23 +305,18 @@ div#content {
                 margin-top: 1em;};
             li {
                 display: inline-block;
-                margin: 0.5em;};};};
-
+                margin: 0.5em;};};};};
 .nav {
     display: inline-block;
     vertical-align: top;
     &#list {
         width: 200px;
-        &ul {
+        > &ul {
             padding: 0;
             margin: 0;
             list-style: none;};
-        &ul li {
+        > &ul li {
             padding: 12px 8px;
-            border: 1px solid #dfdfdf;
             cursor: pointer;};
-        &ul li h4 {
-            margin: 0;};};
-    &#show {
-        border: 1px solid #dfdfdf;
-        width: 700px;};};
+        > ul li h4 {
+            margin: 0;};};;};
