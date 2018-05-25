@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+}
+button {
+    .btn-pilltype {
+        padding: 12px 24px;
+        border-radius: 999px;
+        outline: none;};
+    .btn-roundline {
+        }
+}
+
+header {
+    &__logo {
+        font-weight: bold;
+    }
+}
+
+div#content {
+    margin: 0 2em auto;
+    width: calc(100% - 4em);
+    margin-top: 10%;
+}
+#question_header {
+    text-align: center;
+    font-size: 2em;
+}
+#question_body {
+    margin: 0 auto;
+    width: fit-content;
+    input {
+        &[type="text"],
+        &[type="email"],
+        &[type="number"] {
+            width: 8em;
+            border: none;
+            border-bottom: 1px solid #dfdfdf;
+            outline: none;
+            font-size: 1.5em;
+            padding: 8px;
+            color: #444444;};
+        &::placeholder {
+            color: #dfdfdf;};
+        &:hover,
+        &:focus {
+            border-color: #acacac;};};
+    button {
+        border-radius: 100px;
+        border-color: #dfdfdf;
+        color: #acacac;
+        font-size: 1em;
+        min-width: 40px;
+        width: fit-content;
+        height: 40px;
+        padding: 0.5em 1em;
+        margin-left: 12px;
+        outline: none;
+        &:hover {
+            border-color: #acacac;
+            color: #797979;
+            cursor: pointer;};};};
+    ul {
+        padding: 0;
+        li {
+            display: inline-block;
+            margin: 2em;
+            padding: 1em;
+            border-radius: 8px;
+            color: #444;
+            &:hover {
+                color: #acacac;};};}
+    form {
+        *.multiple {
+            button {
+                display: block;
+                margin: 0 auto;
+                margin-top: 1em;};
+            li {
+                display: inline-block;
+                margin: 0.5em;};};};
+
+.nav {
+    display: inline-block;
+    vertical-align: top;
+    &#list {
+        width: 200px;
+        &ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;};
+        &ul li {
+            padding: 12px 8px;
+            border: 1px solid #dfdfdf;
+            cursor: pointer;};
+        &ul li h4 {
+            margin: 0;};};
+    &#show {
+        border: 1px solid #dfdfdf;
+        width: 700px;};};
